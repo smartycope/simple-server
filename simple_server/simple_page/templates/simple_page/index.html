@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        /* Add media query to target smaller screens, like those on mobile devices */
+        /* @media only screen and (max-width: 600px) { */
+        /* Adjust the size of submit buttons */
+        input[type="submit"] {
+            padding: 10px 20px; /* You can adjust these values according to your preference */
+            font-size: 30px;    /* Adjust the font size as needed */
+        }
+        /* } */
+        /* Set the width of text input fields */
+        input[type="text"] {
+            width: 80%; /* Adjust the width as needed */
+        }
+
+        /* Allow multiline text input */
+        textarea {
+            width: 100%; /* Adjust the width as needed */
+            resize: vertical; /* Allow vertical resizing */
+        }
+        .wrapper {
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            gap: 10px;
+            grid-auto-rows: 50px;
+            grid-template-areas:
+                /* "a a a a b b b b" */
+                "c c c"
+                /* "c c c c d d d d" */
+                "a d b";
+            align-items: start;
+        }
+        .left {
+            grid-area: a;
+        }
+        .right {
+            grid-area: b;
+        }
+        .up {
+            grid-area: c;
+        }
+        .down {
+            grid-area: d;
+        }
+        /* .none {
+            grid-area: e;
+        } */
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Cope's Computer Controller</title>
+</head>
+<body>
+    <form action="{% url 'submit' %}" method="post">
+        {%csrf_token%}
+        <fieldset>
+            <legend><h1>Send Command</h1></legend>
+            <input type="text" name="msg" autocapitalize="off" autocomplete="off">
+            <br>
+            <output>{{ output }}</output>
+        </fieldset>
+        <!-- <input type="submit"> -->
+    </form>
+    <form action="{% url 'key' %}" method="post">
+        {%csrf_token%}
+        <fieldset>
+            <legend><h1>Send Keystroke</h1></legend>
+            <input type="text" name="key" autocapitalize="off" autocomplete="off">
+            <br>
+            <output>{{ key_output }}</output>
+        </fieldset>
+    </form>
+    <form action="{% url 'playpause' %}" method="post">
+        {%csrf_token%}
+        <input type="submit" value="Play/Pause">
+    </form>
+    <form action="{% url 'volume' 1 %}" method="post">
+        {%csrf_token%}
+        <input type="submit" value="Volume Up">
+    </form>
+    <form action="{% url 'volume' 0 %}" method="post">
+        {%csrf_token%}
+        <input type="submit" value="Volume Down">
+    </form>
+    <div class="wrapper">
+        <form action="{% url 'arrow' 'left' %}" method="post" class="left">
+            {%csrf_token%}
+            <input type="submit" value="<">
+        </form>
+        <form action="{% url 'arrow' 'right' %}" method="post" class="right">
+            {%csrf_token%}
+            <input type="submit" value=">">
+        </form>
+        <form action="{% url 'arrow' 'up' %}" method="post" class="up">
+            {%csrf_token%}
+            <input type="submit" value="^">
+        </form>
+        <form action="{% url 'arrow' 'down' %}" method="post" class="down">
+            {%csrf_token%}
+            <input type="submit" value="\/">
+        </form>
+        <!-- <input type="hidden" class="none"> -->
+    </div>
+</body>
+</html>
