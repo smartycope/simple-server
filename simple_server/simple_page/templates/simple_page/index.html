@@ -76,14 +76,6 @@
         {%csrf_token%}
         <input type="submit" value="Play/Pause">
     </form>
-    <form action="{% url 'volume' 1 %}" method="post">
-        {%csrf_token%}
-        <input type="submit" value="Volume Up">
-    </form>
-    <form action="{% url 'volume' 0 %}" method="post">
-        {%csrf_token%}
-        <input type="submit" value="Volume Down">
-    </form>
     <div class="wrapper">
         <form action="{% url 'arrow' 'left' %}" method="post" class="left">
             {%csrf_token%}

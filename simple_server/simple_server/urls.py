@@ -25,5 +25,7 @@ urlpatterns = [
     path('key/', views.key, name='key'),
     path('arrow/<str:key>/', views.arrow, name='arrow'),
     path('playpause/', views.playpause, name='playpause'),
-    path('volume/<int:add>/', views.change_volume, name='volume')
+    path('temp/', views.temp_graph, name='temp'),
+    path('temp2/', views.temp_graph2, name='temp2'),
+    # path('volume/<int:add>/', views.change_volume, name='volume')
 ]
